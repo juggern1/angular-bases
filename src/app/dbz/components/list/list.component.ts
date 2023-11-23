@@ -1,8 +1,9 @@
 // import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Character} from '../../interfaces/character.interface';
 
 @Component({
-  selector: 'app-dbz-list',
+  selector: 'dbz-list',
   // imports: [
   //   CommonModule,
   // ],
@@ -10,4 +11,24 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./list.component.css'],
 
 })
-export class ListComponent { }
+
+export class ListComponent {
+  @Input()
+  characterList: Character[] = [{
+    name:'Trunks',
+    power: 10
+  }]
+
+
+  //onDelete = Index value : number EMITIR EL id
+  @Output()
+  public onDelete: EventEmitter<string> = new EventEmitter();
+
+  onDeleteCharacter(id?: string):void{
+    //TODO: EMITIR EL ID DEL PERSONAJE
+    if (!id) return;
+
+    this.onDelete.emit(id);
+  }
+
+ }
